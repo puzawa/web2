@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web1</title>
+    <style>
+
+        html, body, div, span, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        abbr, address, cite, code,
+        del, dfn, em, img, ins, kbd, q, samp,
+        small, strong, sub, sup, var,
+        b, i, button,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+        }
+
+        body {
+            line-height: 1;
+        }
+
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+
+        nav, ul {
+            list-style: none;
+        }
+
+        blockquote, q {
+            quotes: none;
+        }
+
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: none;
+        }
+
+        a {
+            margin: 0;
+            padding: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+        }
+
+        ins {
+            background-color: #fff;
+            color: #000;
+            text-decoration: none;
+        }
+
+        mark {
+            background-color: #fff;
+            color: #000;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        del {
+            text-decoration: line-through;
+        }
+
+        abbr[title], dfn[title] {
+            border-bottom: 1px dotted;
+            cursor: help;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #000;
+            margin: 1em 0;
+            padding: 0;
+        }
+
+        input, select {
+            vertical-align: middle;
+        }
+    </style>
+    <style>
+
+        html {
+            box-sizing: border-box;
+            min-height: 100vh;
+        }
+
+        *, *:after, *:before {
+            box-sizing: inherit;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1620px;
+            padding: 0 15px;
+            font-family: Arial, sans-serif;
+            font-size: 32px;
+            font-style: normal;
+            line-height: normal;
+            margin: 0 auto;
+        }
+
+        .header, .footer {
+            background-color: #3D3D3D;
+            color: #FFFFFF;
+        }
+
+        .header__inner {
+            display: flex;
+            justify-content: space-evenly;
+            padding: 15px 0;
+        }
+
+        .main {
+            flex: 1 0 auto;
+            padding: 30px 0;
+        }
+
+        .main__inner {
+            flex: 1 0 auto;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .form {
+            display: flex;
+            align-items: center;
+        }
+
+        .form__body {
+            display: flex;
+            flex-direction: column;
+            gap: 30px 0;
+        }
+
+        .form-checkbox {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+        }
+
+        .form-checkbox-style {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(155, 123, 255, 0.4);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-checkbox:checked + .form-checkbox-style {
+            border: 2px solid #9B7BFF;
+        }
+
+        .form-checkbox:checked + .form-checkbox-style:before {
+            content: '';
+            position: absolute;
+            transform: translate(2px, 2px);
+            width: 24px;
+            height: 24px;
+            border-radius: 2px;
+            background-color: #9B7BFF;
+        }
+
+        .form-checkbox-text {
+            gap: 0 10px;
+            margin-left: 40px;
+            cursor: pointer;
+        }
+
+        .form-input {
+            width: 150px;
+            height: 40px;
+            padding-left: 7px;
+        }
+
+        .form-input:focus {
+            border-color: #9B7BFF;
+            outline: none;
+        }
+
+        .form-input::placeholder, .form-input, .form-submit {
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .form-input, .form-submit {
+            border: 2px solid rgba(155, 123, 255, 0.4);
+            border-radius: 4px;
+        }
+
+        .form-submit {
+            padding: 15px 0;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .form-submit:active {
+            border-color: #9B7BFF;
+        }
+
+        .form-submit:disabled {
+            border-color: rgba(155, 0, 255, 0.4);
+        }
+
+
+        .graph__axis, .graph__arrow, .graph__serif {
+            stroke: #6A4CFF;
+            stroke-width: 2px;
+        }
+
+        .graph__arrow {
+            fill: none;
+        }
+
+        .graph__point {
+            fill: #A084FF;
+            fill-opacity: 0.2;
+            stroke: #6A4CFF;
+            stroke-width: 2px;
+        }
+
+        .archive {
+            width: 600px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .archive__heading {
+            margin: 0 0 10px 0;
+            font-family: Arial, sans-serif;
+            font-size: 32px;
+            font-style: normal;
+        }
+
+        .archive__table-wrapper {
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+        }
+
+        .archive__table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-archive__head th {
+            position: sticky;
+            top: 0;
+            background: #f8f8f8;
+            z-index: 1;
+            border-bottom: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table-archive__main td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+
+        }
+    </style>
+
+    <style>
+        #student-name {
+            font-weight: bold;
+            color: #ffddff;
+            font-size: 36px;
+        }
+        .header__inner {
+            font-family: cursive;
+            color: #fafafa;
+            font-size: 32px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .header__inner td {
+            padding: 5px 10px;
+        }
+
+        td[class="option"] {
+            color: #ff6600;
+            font-style: italic;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <table class="header__inner">
+            <tr>
+                <td id="student-name">Плотников Алексей Алексеевич</td>
+                <td class="group">P3214</td>
+                <td class="option">Вариант 413039</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="main">
+    <div class="container">
+        <div class="main__inner">
+            <div class="form">
+                <form class="form__body" method="get" onsubmit="exchange(event)">
+                    <table>
+                        <tr>
+                            <td colspan="6" align="center"><b>X</b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" name="X-input" value="-3"
+                                              class="X-input__checkbox form-checkbox">
+                                    <span class="form-checkbox-style"></span><span class="form-checkbox-text">-3</span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" name="X-input" value="-2"
+                                              class="X-input__checkbox form-checkbox">
+                                    <span class="form-checkbox-style"></span><span class="form-checkbox-text">-2</span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" name="X-input" value="-1"
+                                              class="X-input__checkbox form-checkbox">
+                                    <span class="form-checkbox-style"></span><span class="form-checkbox-text">-1</span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" name="X-input" value="0"
+                                              class="X-input__checkbox form-checkbox">
+                                    <span class="form-checkbox-style"></span><span
+                                            class="form-checkbox-text">0</span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" name="X-input" value="1"
+                                              class="X-input__checkbox form-checkbox">
+                                    <span class="form-checkbox-style"></span><span
+                                            class="form-checkbox-text">1</span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" name="X-input" value="2"
+                                              class="X-input__checkbox form-checkbox">
+                                    <span class="form-checkbox-style"></span><span
+                                            class="form-checkbox-text">2</span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" name="X-input" value="3"
+                                              class="X-input__checkbox form-checkbox">
+                                    <span class="form-checkbox-style"></span><span
+                                            class="form-checkbox-text">3</span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" name="X-input" value="4"
+                                              class="X-input__checkbox form-checkbox">
+                                    <span class="form-checkbox-style"></span><span
+                                            class="form-checkbox-text">4</span></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label><input type="checkbox" name="X-input" value="5"
+                                              class="X-input__checkbox form-checkbox">
+                                    <span class="form-checkbox-style"></span><span
+                                            class="form-checkbox-text">5</span></label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="6" align="center" style="padding: 10px 0;">
+                                <b>Y:</b> <input type="text" name="Y-input" placeholder="Введите Y"
+                                                 class="Y-input__input form-input">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" align="center" style="padding: 10px 0;">
+                                <b>R:</b>
+                                <select name="R-input" class="R-input__select form-input">
+                                    <option value="1">1</option>
+                                    <option value="1.5">1.5</option>
+                                    <option value="2">2</option>
+                                    <option value="2.5">2.5</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" align="center" style="padding: 10px 0;">
+                                <input type="submit" class="form-submit" disabled>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <table class="graph-table" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <svg class="graph__body" width="600" height="600" viewBox="-300 -300 600 600"
+                             xmlns="http://www.w3.org/2000/svg">
+
+                            <line x1="-300" x2="300" y1="0" y2="0" class="graph__axis"/>
+                            <line x1="0" x2="0" y1="-300" y2="300" class="graph__axis"/>
+
+                            <path d="M 280 10 L 300 0 L 280 -10" class="graph__arrow"/>
+                            <path d="M 10 -280 L 0 -300 L -10 -280" class="graph__arrow"/>
+
+                            <line x1="-200" x2="-200" y1="5" y2="-5" class="graph__serif"/>
+                            <line x1="-100" x2="-100" y1="5" y2="-5" class="graph__serif"/>
+                            <line x1="100" x2="100" y1="5" y2="-5" class="graph__serif"/>
+                            <line x1="200" x2="200" y1="5" y2="-5" class="graph__serif"/>
+                            <line x1="5" x2="-5" y1="-200" y2="-200" class="graph__serif"/>
+                            <line x1="5" x2="-5" y1="-100" y2="-100" class="graph__serif"/>
+                            <line x1="5" x2="-5" y1="100" y2="100" class="graph__serif"/>
+                            <line x1="5" x2="-5" y1="200" y2="200" class="graph__serif"/>
+
+                            <text x="282" y="33" class="graph__sub">X</text>
+                            <text x="192" y="33" class="graph__sub sub-R">1</text>
+                            <text x="82" y="33" class="graph__sub sub-R_div_2">0.5</text>
+                            <text x="-135" y="33" class="graph__sub sub-R_div_2">-0.5</text>
+                            <text x="-220" y="33" class="graph__sub sub-R">-1</text>
+                            <text x="-33" y="-282" class="graph__sub">Y</text>
+                            <text x="-30" y="-192" class="graph__sub sub-R">1</text>
+                            <text x="-50" y="-92" class="graph__sub sub-R_div_2">0.5</text>
+                            <text x="-67" y="108" class="graph__sub sub-R_div_2">-0.5</text>
+                            <text x="-45" y="208" class="graph__sub sub-R">-1</text>
+
+                            <path d="M0 -200 a200 200 0 0 1 200 200 l-200 0 z" fill="purple" fill-opacity="0.5"/>
+                            <path d="M-100 0 l100 0 l0 -200 z" fill="purple" fill-opacity="0.5"/>
+                            <path d="M-100 0 l100 0 l0 200 l-100 0 z" fill="purple" fill-opacity="0.5"/>
+
+                            <circle r="0" class="graph__point"></circle>
+                        </svg>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="archive">
+                <h2 class="archive__heading">История</h2>
+                <div class="archive__table-wrapper">
+                    <table class="archive__table table-archive">
+                        <thead class="table-archive__head">
+                        <tr>
+                            <th>X</th>
+                            <th>Y</th>
+                            <th>R</th>
+                            <th>Hit</th>
+                            <th>Sent</th>
+                            <th>Exec</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-archive__main">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
