@@ -32,104 +32,127 @@
         <div class="main__inner">
             <div class="form">
                 <form class="form__body" method="get" onsubmit="exchange(event)">
-                    <table>
-                        <tr>
-                            <td colspan="6" align="center"><b>X</b></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label><input type="checkbox" name="X-input" value="-3"
-                                              class="X-input__checkbox form-checkbox">
-                                    <span class="form-checkbox-style"></span><span class="form-checkbox-text">-3</span></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label><input type="checkbox" name="X-input" value="-2"
-                                              class="X-input__checkbox form-checkbox">
-                                    <span class="form-checkbox-style"></span><span class="form-checkbox-text">-2</span></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label><input type="checkbox" name="X-input" value="-1"
-                                              class="X-input__checkbox form-checkbox">
-                                    <span class="form-checkbox-style"></span><span class="form-checkbox-text">-1</span></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label><input type="checkbox" name="X-input" value="0"
-                                              class="X-input__checkbox form-checkbox">
-                                    <span class="form-checkbox-style"></span><span
-                                            class="form-checkbox-text">0</span></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label><input type="checkbox" name="X-input" value="1"
-                                              class="X-input__checkbox form-checkbox">
-                                    <span class="form-checkbox-style"></span><span
-                                            class="form-checkbox-text">1</span></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label><input type="checkbox" name="X-input" value="2"
-                                              class="X-input__checkbox form-checkbox">
-                                    <span class="form-checkbox-style"></span><span
-                                            class="form-checkbox-text">2</span></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label><input type="checkbox" name="X-input" value="3"
-                                              class="X-input__checkbox form-checkbox">
-                                    <span class="form-checkbox-style"></span><span
-                                            class="form-checkbox-text">3</span></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label><input type="checkbox" name="X-input" value="4"
-                                              class="X-input__checkbox form-checkbox">
-                                    <span class="form-checkbox-style"></span><span
-                                            class="form-checkbox-text">4</span></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label><input type="checkbox" name="X-input" value="5"
-                                              class="X-input__checkbox form-checkbox">
-                                    <span class="form-checkbox-style"></span><span
-                                            class="form-checkbox-text">5</span></label>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="6" align="center" style="padding: 10px 0;">
-                                <b>Y:</b> <input type="text" name="Y-input" placeholder="Введите Y"
-                                                 class="Y-input__input form-input">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="6" align="center" style="padding: 10px 0;">
-                                <b>R:</b>
-                                <select name="R-input" class="R-input__select form-input">
-                                    <option value="1">1</option>
-                                    <option value="1.5">1.5</option>
-                                    <option value="2">2</option>
-                                    <option value="2.5">2.5</option>
-                                    <option value="3">3</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="6" align="center" style="padding: 10px 0;">
-                                <input type="submit" class="form-submit" disabled>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="X-input">
+                        <p class="X-input__text form-text">X</p>
+                        <ul class="X-input__list form-list">
+                            <li class="X-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="X-input" value="-3" class="X-input__checkbox form-checkbox">
+                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="X-input__checkbox-text form-checkbox-text">-3</span>
+                                </label>
+                            </li>
+                            <li class="X-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="X-input" value="-2" class="X-input__checkbox form-checkbox">
+                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="X-input__checkbox-text form-checkbox-text">-2</span>
+                                </label>
+                            </li>
+                            <li class="X-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="X-input" value="-1" class="X-input__checkbox form-checkbox">
+                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="X-input__checkbox-text form-checkbox-text">-1</span>
+                                </label>
+                            </li>
+                            <li class="X-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="X-input" value="0" class="X-input__checkbox form-checkbox">
+                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="X-input__checkbox-text form-checkbox-text">0</span>
+                                </label>
+                            </li>
+                            <li class="X-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="X-input" value="1" class="X-input__checkbox form-checkbox">
+                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="X-input__checkbox-text form-checkbox-text">1</span>
+                                </label>
+                            </li>
+                            <li class="X-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="X-input" value="2" class="X-input__checkbox form-checkbox">
+                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="X-input__checkbox-text form-checkbox-text">2</span>
+                                </label>
+                            </li>
+                            <li class="X-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="X-input" value="3"
+                                           class="X-input__checkbox form-checkbox">
+                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="X-input__checkbox-text form-checkbox-text">3</span>
+                                </label>
+                            </li>
+                            <li class="X-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="X-input" value="4"
+                                           class="X-input__checkbox form-checkbox">
+                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="X-input__checkbox-text form-checkbox-text">4</span>
+                                </label>
+                            </li>
+                            <li class="X-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="X-input" value="5"
+                                           class="X-input__checkbox form-checkbox">
+                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="X-input__checkbox-text form-checkbox-text">5</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="Y-input">
+                        <p class="Y-input__text form-text">Y</p>
+                        <label>
+                            <input type="text" name="Y-input" placeholder="Введите Y" class="Y-input__input form-input">
+                        </label>
+                    </div>
+                    <div class="R-input">
+                        <p class="R-input__text form-text">R</p>
+                        <ul class="R-input__list form-list">
+                            <li class="R-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="R-input" value="1" class="R-input__checkbox form-checkbox">
+                                    <span class="R-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="R-input__checkbox-text form-checkbox-text">1</span>
+                                </label>
+                            </li>
+                            <li class="R-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="R-input" value="1.5" class="R-input__checkbox form-checkbox">
+                                    <span class="R-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="R-input__checkbox-text form-checkbox-text">1.5</span>
+                                </label>
+                            </li>
+                            <li class="R-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="R-input" value="2"
+                                           class="R-input__checkbox form-checkbox">
+                                    <span class="R-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="R-input__checkbox-text form-checkbox-text">2</span>
+                                </label>
+                            </li>
+                            <li class="R-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="R-input" value="2.5"
+                                           class="R-input__checkbox form-checkbox">
+                                    <span class="R-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="R-input__checkbox-text form-checkbox-text">2.5</span>
+                                </label>
+                            </li>
+                            <li class="R-input__item form-item">
+                                <label>
+                                    <input type="checkbox" name="R-input" value="3"
+                                           class="R-input__checkbox form-checkbox">
+                                    <span class="R-input__checkbox-style form-checkbox-style"></span>
+                                    <span class="R-input__checkbox-text form-checkbox-text">3</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <input type="submit" class="form-submit" disabled>
                 </form>
             </div>
             <table class="graph-table" border="0" cellspacing="0" cellpadding="0">
