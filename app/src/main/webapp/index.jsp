@@ -178,15 +178,26 @@
                             <th>Y</th>
                             <th>R</th>
                             <th>Hit</th>
-                            <th>Sent</th>
-                            <th>Exec</th>
                         </tr>
                         </thead>
                         <tbody class="table-archive__main">
+                        <% Object resultRow = request.getAttribute("newRow"); %>
+                        <% if (resultRow != null) {
+                            TableRow newRow = (TableRow) resultRow;
+                        %>
+                        <tr>
+                            <td><%= newRow.getX() %></td>
+                            <td><%= newRow.getY() %></td>
+                            <td><%= newRow.getR() %></td>
+                            <td><%= newRow.getResult() ? "Hit" : "Miss" %></td>
+                        </tr>
+                        <% } %>
                         </tbody>
                     </table>
                 </div>
             </div>
+
+
         </div>
     </div>
 </main>
