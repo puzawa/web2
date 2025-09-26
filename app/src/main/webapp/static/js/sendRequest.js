@@ -81,18 +81,6 @@ YInput.addEventListener('input', function () {
     handlePoint();
 });
 
-function checkX(x){
-    return !((-3 <= x) && (x <= 5));
-}
-
-function checkY(y){
-    return !((-5 <= y) && (y <= 3));
-}
-
-function checkR(r){
-    return !((1 <= r) && (r <= 5));
-}
-
 async function sendData(x, y, r){
     let formData = new URLSearchParams()
     formData.set('x', x)
@@ -110,53 +98,25 @@ async function sendData(x, y, r){
     console.log("data fetched")
 }
 
-function parseFormData(){
-    let x = document.getElementById("x-selector")
-    let r = document.querySelector(".r-checkbox:checked")
 
-    if (r == null){
-        alert("Введите R");
-        return
+async function exchange(event) {
+    event.preventDefault();
+
+    const X = activeXCheckbox.value;
+    let Y = YInput.value;
+    const R = activeXCheckbox.value;
+
+    const startExec = Date.now();
+    const sendTime = new Date().toLocaleTimeString();
+
+    try {
+        sendData(X.toString(),Y.toString(),R.toString());
+        drawDot(plane, X, Y, R);
+
+    } catch (err) {
+        alert('Request failed: ' + err.message);
     }
-
-    const xValue = parseInt(x.options[x.selectedIndex].value);
-    const yValue = parseFloat(document.getElementById("YInput").value);
-    const rValue = parseFloat(r.value)
-
-    console.log(xValue, yValue, rValue)
-
-    let errorsStr = "";
-
-    if (isNaN(xValue)){
-        errorsStr += "Введите X\n";
-    } else if (checkX(xValue)){
-        errorsStr += ("X введён неверно\n");
-    }
-
-    if (isNaN(yValue)){
-        errorsStr += ("Введите Y\n");
-    } else if (checkY(yValue)){
-        errorsStr += ("Y введён неверно\n");
-    }
-
-    if (isNaN(rValue)){
-        errorsStr += ("Введите R\n");
-    } else if (checkR(rValue)){
-        errorsStr += ("R введён неверно\n");
-    }
-
-    if (errorsStr){
-        alert(errorsStr);
-        return
-    }
-
-    sendData(x.options[x.selectedIndex].value, document.getElementById("YInput").value, r.value)
-    drawDot(plane, xValue, yValue, rValue)
 }
-// form.addEventListener("submit", (event) =>{
-//     event.preventDefault()
-//     parseFormData()
-// })
 
 plane.addEventListener("mousedown", async (event) => {
     event.preventDefault()
@@ -178,6 +138,6 @@ plane.addEventListener("mousedown", async (event) => {
 
     console.log(x, y, rVal)
 
-    //sendData(x.toString(), y.toString(), rVal.toString())
+    sendData(x.toString(), y.toString(), rVal.toString())
     drawDot(plane, x, y, rVal)
 })
