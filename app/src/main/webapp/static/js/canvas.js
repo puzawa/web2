@@ -3,6 +3,15 @@ const ctx = canvas.getContext('2d');
 
 canvas.width = 600;
 canvas.height = 600;
+const step = 60; //better if w|h / n
+const cx = canvas.width/2;
+const cy = canvas.height/2;
+
+const rw = (canvas.width - step*2)/2;
+const rh = (canvas.height - step*2)/2;
+
+const line_length = 10;
+const line_width = 4;
 
 function drawAxis() {
     ctx.beginPath();
@@ -23,7 +32,6 @@ function drawAxis() {
 
 function drawGrid() {
     ctx.beginPath();
-    const step = 60; //better if w|h / n
     for (let x = 0; x < canvas.width + step; x += step) {
         ctx.moveTo(x, 0);
         ctx.lineTo(x, canvas.height);
@@ -41,121 +49,122 @@ function drawGrid() {
     }
 }
 
-function drawCircle(x, y, r) {
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.fillStyle = '#8ba9f0';
-    ctx.arc(x, y, r, Math.PI, -Math.PI*0.5, false);
-    ctx.closePath();
-    ctx.fill();
-}
-
-function drawRect(x,y) {
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.fillStyle = '#8ba9f0';
-    ctx.rect(x, y, -120, 120);
-    ctx.closePath();
-    ctx.fill();
-}
-
-function drawTriangle(x,y) {
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.fillStyle = '#8ba9f0';
-    ctx.lineTo(x+120, y);
-    ctx.lineTo(x, y-120);
-    ctx.closePath();
-    ctx.fill();
-}
-
 function drawCoords() {
     ctx.fillStyle = 'black';
     ctx.font = '1.5em Montserrat';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'bottom';
 
-    const w = canvas.width;
-    const h = canvas.height;
-
-    const cx = w/2;
-    const cy = h/2;
-
-    ctx.fillText('R/2', cx, cy + h/4);
-    ctx.beginPath();
-    ctx.moveTo(210, 145);
-    ctx.lineTo(210,155);
-    ctx.strokeStyle = 'black';
-    ctx.closePath();
-    ctx.stroke();
-
-    ctx.fillText('R', 270, 150);
-    ctx.beginPath();
-    ctx.moveTo(270, 145);
-    ctx.lineTo(270,155);
-    ctx.strokeStyle = 'black';
-    ctx.closePath();
-    ctx.stroke();
-
-    ctx.textAlign = 'left';
-
-    ctx.fillText('-R/2', 150, 210);
-    ctx.beginPath();
-    ctx.moveTo(145, 210);
-    ctx.lineTo(155, 210);
-    ctx.strokeStyle = 'black';
-    ctx.closePath();
-    ctx.stroke();
-
-    ctx.fillText('-R', 150, 270);
-    ctx.beginPath();
-    ctx.moveTo(145, 270);
-    ctx.lineTo(155, 270);
-    ctx.strokeStyle = 'black';
-    ctx.closePath();
-    ctx.stroke();
-
+    //horizontal
     ctx.textAlign = 'center';
-
+    ctx.fillText('R/2', cx + rw/2, cy);
     ctx.beginPath();
-    ctx.fillText('-R/2', 90, 150);
-    ctx.moveTo(90, 145);
-    ctx.lineTo(90,155);
+    ctx.moveTo(cx + rw/2, cy-line_length);
+    ctx.lineTo(cx + rw/2,cy+line_length);
     ctx.strokeStyle = 'black';
+    ctx.lineWidth = line_width;
     ctx.closePath();
     ctx.stroke();
 
+    ctx.fillText('R', cx + rw , cy );
     ctx.beginPath();
-    ctx.fillText('-R', 30, 150);
-    ctx.moveTo(30, 145);
-    ctx.lineTo(30,155);
+    ctx.moveTo(cx + rw, cy-line_length);
+    ctx.lineTo(cx + rw,cy+line_length);
     ctx.strokeStyle = 'black';
+    ctx.lineWidth = line_width;
     ctx.closePath();
     ctx.stroke();
 
+    ctx.fillText('-R/2', cx - rw/2, cy);
+    ctx.beginPath();
+    ctx.moveTo(cx - rw/2, cy-line_length);
+    ctx.lineTo(cx - rw/2,cy+line_length);
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = line_width;
+    ctx.closePath();
+    ctx.stroke();
+
+    ctx.fillText('-R', cx - rw , cy );
+    ctx.beginPath();
+    ctx.moveTo(cx - rw, cy-line_length);
+    ctx.lineTo(cx - rw,cy+line_length);
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = line_width;
+    ctx.closePath();
+    ctx.stroke();
+
+    //vertical
+    const text_x_shift = 10;
     ctx.textAlign = 'left';
-
+    ctx.fillText('R/2', cx +text_x_shift, cy - rh/2);
     ctx.beginPath();
-    ctx.fillText('R/2', 150, 90);
-    ctx.moveTo(145, 90);
-    ctx.lineTo(155, 90);
+    ctx.moveTo(cx -line_length, cy- rh/2);
+    ctx.lineTo(cx+ line_length,cy-rh/2);
     ctx.strokeStyle = 'black';
+    ctx.lineWidth = line_width;
     ctx.closePath();
     ctx.stroke();
 
+    ctx.fillText('R', cx +text_x_shift, cy - rh);
     ctx.beginPath();
-    ctx.fillText('R', 150, 30);
-    ctx.moveTo(145, 30);
-    ctx.lineTo(155, 30);
+    ctx.moveTo(cx -line_length, cy- rh);
+    ctx.lineTo(cx+ line_length,cy-rh);
     ctx.strokeStyle = 'black';
+    ctx.lineWidth = line_width;
     ctx.closePath();
     ctx.stroke();
 
+    ctx.fillText('-R/2', cx +text_x_shift, cy + rh/2);
+    ctx.beginPath();
+    ctx.moveTo(cx -line_length, cy + rh/2);
+    ctx.lineTo(cx+ line_length,cy + rh/2);
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = line_width;
+    ctx.closePath();
+    ctx.stroke();
+
+    ctx.fillText('-R', cx +text_x_shift, cy + rh);
+    ctx.beginPath();
+    ctx.moveTo(cx -line_length, cy + rh);
+    ctx.lineTo(cx+ line_length,cy + rh);
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = line_width;
+    ctx.closePath();
+    ctx.stroke();
 }
 
-//drawCircle(150,150,60);
-//drawRect(150,150);
-//drawTriangle(150,150);
+function drawCircle(x, y, r) {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.fillStyle = '#8ba9f0';
+    ctx.arc(x, y, r, Math.PI, Math.PI*0.5, true);
+    ctx.closePath();
+    ctx.fill();
+}
+
+function drawRect(x1,y1,w,h) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.fillStyle = '#8ba9f0';
+    ctx.rect(x1, y1, w, h);
+    ctx.closePath();
+    ctx.fill();
+}
+
+function drawTriangle(x,y,x2,y2) {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.fillStyle = '#8ba9f0';
+    ctx.lineTo(x+x2, y);
+    ctx.lineTo(x, y+y2);
+    ctx.closePath();
+    ctx.fill();
+}
+
+drawCircle(cx,cy,rh/2);
+
+drawRect(cx,cy,rw/2,-rh );
+drawTriangle(cx,cy, -rw/2,-rh);
 drawGrid();
 drawCoords();
 drawAxis();
