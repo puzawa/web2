@@ -1,5 +1,6 @@
 const plane = document.getElementById('coordinate-plane')
 const form = document.getElementById('coords-form')
+const submitBtn = document.querySelector('.form-submit');
 
 const XCheckboxes = document.querySelectorAll('.X-input__checkbox');
 const RCheckboxes = document.querySelectorAll('.R-input__checkbox');
@@ -9,13 +10,61 @@ window.activeRCheckbox = null;
 
 const YInput = document.querySelector('.form-input');
 
+function saveDot(x, y, r) {
+    localStorage.setItem("x", x.toString())
+    localStorage.setItem("y", y.toString())
+    localStorage.setItem("r", r.toString())
+}
+
+function drawDot(canvas, x, y, r){
+    const ctx = canvas.getContext('2d')
+
+    ctx.beginPath();
+    ctx.translate(canvas.width/2, canvas.height/2);
+    let plotX = x*(canvas.rw/r);
+    let plotY = -y*(canvas.rh/r);
+
+    ctx.arc(plotX, plotY, 5, 0, 2*Math.PI);
+    ctx.fillStyle = 'purple';
+    ctx.fill();
+
+    ctx.resetTransform();
+    ctx.closePath()
+
+    saveDot(x, y, r);
+}
+
+function handlePoint() {
+    window.redrawCanvas();
+
+    const y_str = YInput.value;
+    const parts = y_str.split(".");
+    const num = parseFloat(y_str);
+
+    if (window.activeXCheckbox === null ||
+        window.activeRCheckbox === null ||
+        ['-', ''].includes(YInput.value)||
+        (!isNaN(num) && (num > 3 || num < -5)) ||
+        parts.length > 2 ||
+        ((num === 3 || num === -5) && (parts.length > 1 && !/^0*$/.test(parts[1])))
+    ) {
+        submitBtn.disabled = true;
+    } else {
+
+        submitBtn.disabled = false;
+
+        if (!(isFinite(activeXCheckbox.value) && isFinite(YInput.value) && isFinite(activeRCheckbox.value))) return;
+
+        drawDot(plane, activeXCheckbox.value, YInput.value, activeRCheckbox.value);
+    }
+}
 
 XCheckboxes.forEach(checkbox => checkbox.addEventListener('change', () => {
     if (checkbox === window.activeXCheckbox) window.activeXCheckbox = null; else {
         if (window.activeXCheckbox !== null) window.activeXCheckbox.checked = false;
         window.activeXCheckbox = checkbox;
     }
-   // handlePoint();
+    handlePoint();
 }));
 
 RCheckboxes.forEach(checkbox => checkbox.addEventListener('change', () => {
@@ -23,9 +72,14 @@ RCheckboxes.forEach(checkbox => checkbox.addEventListener('change', () => {
         if (window.activeRCheckbox !== null) window.activeRCheckbox.checked = false;
         window.activeRCheckbox = checkbox;
     }
-    // handlePoint();
-    window.redrawCanvas();
+    handlePoint();
 }));
+
+YInput.addEventListener('paste', event => event.preventDefault());
+YInput.addEventListener('input', function () {
+    if (!/^-?\d*\.?\d*$/.test(this.value)) this.value = this.value.slice(0, -1);
+    handlePoint();
+});
 
 function checkX(x){
     return !((-3 <= x) && (x <= 5));
@@ -99,31 +153,6 @@ function parseFormData(){
     sendData(x.options[x.selectedIndex].value, document.getElementById("YInput").value, r.value)
     drawDot(plane, xValue, yValue, rValue)
 }
-
-function saveDot(x, y, r) {
-    localStorage.setItem("x", x.toString())
-    localStorage.setItem("y", y.toString())
-    localStorage.setItem("r", r.toString())
-}
-
-function drawDot(canvas, x, y, r){
-    const ctx = canvas.getContext('2d')
-
-    ctx.beginPath();
-    ctx.translate(canvas.width/2, canvas.height/2);
-    let plotX = x*(canvas.rw/r);
-    let plotY = -y*(canvas.rh/r);
-
-    ctx.arc(plotX, plotY, 5, 0, 2*Math.PI);
-    ctx.fillStyle = 'purple';
-    ctx.fill();
-
-    ctx.resetTransform();
-    ctx.closePath()
-
-    saveDot(x, y, r);
-}
-
 // form.addEventListener("submit", (event) =>{
 //     event.preventDefault()
 //     parseFormData()
