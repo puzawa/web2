@@ -1,8 +1,8 @@
 const canvas = document.getElementById('coordinate-plane');
 const ctx = canvas.getContext('2d');
 
-canvas.width = 300;
-canvas.height = 300;
+canvas.width = 600;
+canvas.height = 600;
 
 function drawAxis() {
     ctx.beginPath();
@@ -23,7 +23,8 @@ function drawAxis() {
 
 function drawGrid() {
     ctx.beginPath();
-    for (let x = 0; x < 330; x += 30) {
+    const step = 60; //better if w|h / n
+    for (let x = 0; x < canvas.width + step; x += step) {
         ctx.moveTo(x, 0);
         ctx.lineTo(x, canvas.height);
         ctx.strokeStyle = '#427aa1';
@@ -31,7 +32,7 @@ function drawGrid() {
         ctx.stroke();
     }
 
-    for (let y = 0; y < 330; y += 30) {
+    for (let y = 0; y < canvas.height + step; y += step) {
         ctx.moveTo(0, y);
         ctx.lineTo(canvas.width, y);
         ctx.strokeStyle = '#427aa1';
@@ -74,7 +75,13 @@ function drawCoords() {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'bottom';
 
-    ctx.fillText('R/2', 210, 150);
+    const w = canvas.width;
+    const h = canvas.height;
+
+    const cx = w/2;
+    const cy = h/2;
+
+    ctx.fillText('R/2', cx, cy + h/4);
     ctx.beginPath();
     ctx.moveTo(210, 145);
     ctx.lineTo(210,155);
@@ -146,9 +153,9 @@ function drawCoords() {
 
 }
 
-drawCircle(150,150,60);
-drawRect(150,150);
-drawTriangle(150,150);
+//drawCircle(150,150,60);
+//drawRect(150,150);
+//drawTriangle(150,150);
 drawGrid();
 drawCoords();
 drawAxis();
