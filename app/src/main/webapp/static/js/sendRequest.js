@@ -1,12 +1,31 @@
 const plane = document.getElementById('coordinate-plane')
 const form = document.getElementById('coords-form')
 
-function selectOnlyThis(checkBoxId){
-    for (let i = 1; i <= 5; i++){
-        document.getElementById("r" + i).checked = false
+const XCheckboxes = document.querySelectorAll('.X-input__checkbox');
+const RCheckboxes = document.querySelectorAll('.R-input__checkbox');
+
+window.activeXCheckbox = null;
+window.activeRCheckbox = null;
+
+const YInput = document.querySelector('.form-input');
+
+
+XCheckboxes.forEach(checkbox => checkbox.addEventListener('change', () => {
+    if (checkbox === window.activeXCheckbox) window.activeXCheckbox = null; else {
+        if (window.activeXCheckbox !== null) window.activeXCheckbox.checked = false;
+        window.activeXCheckbox = checkbox;
     }
-    document.getElementById(checkBoxId).checked = true
-}
+   // handlePoint();
+}));
+
+RCheckboxes.forEach(checkbox => checkbox.addEventListener('change', () => {
+    if (checkbox === window.activeRCheckbox) window.activeRCheckbox = null; else {
+        if (window.activeRCheckbox !== null) window.activeRCheckbox.checked = false;
+        window.activeRCheckbox = checkbox;
+    }
+    // handlePoint();
+    window.redrawCanvas();
+}));
 
 function checkX(x){
     return !((-3 <= x) && (x <= 5));
@@ -92,8 +111,8 @@ function drawDot(canvas, x, y, r){
 
     ctx.beginPath();
     ctx.translate(canvas.width/2, canvas.height/2);
-    let plotX = x*(120/r);
-    let plotY = -y*(120/r);
+    let plotX = x*(canvas.rw/r);
+    let plotY = -y*(canvas.rh/r);
 
     ctx.arc(plotX, plotY, 5, 0, 2*Math.PI);
     ctx.fillStyle = 'purple';
@@ -105,15 +124,15 @@ function drawDot(canvas, x, y, r){
     saveDot(x, y, r);
 }
 
-form.addEventListener("submit", (event) =>{
-    event.preventDefault()
-    parseFormData()
-})
+// form.addEventListener("submit", (event) =>{
+//     event.preventDefault()
+//     parseFormData()
+// })
 
 plane.addEventListener("mousedown", async (event) => {
     event.preventDefault()
 
-    let r = document.querySelector(".r-checkbox:checked")
+    let r = document.querySelector(".R-input__checkbox:checked")
     if (r == null) {
         alert("Введите R");
         return
@@ -124,13 +143,12 @@ plane.addEventListener("mousedown", async (event) => {
     const clickY = event.clientY - canvasPos.top
 
     console.log(clickX, clickY)
-
-    let rVal = r.value
-    let x = ((clickX.toFixed(4) - 150) / (120/rVal)).toFixed(4)
-    let y = ((150 - clickY.toFixed(4)) / (120/rVal)).toFixed(4)
+    const rVal = r.value;
+    const x = ((clickX - canvas.cx) / (canvas.rw / rVal)).toFixed(4);
+    const y = ((canvas.cy - clickY) / (canvas.rh / rVal)).toFixed(4);
 
     console.log(x, y, rVal)
 
-    sendData(x.toString(), y.toString(), rVal.toString())
+    //sendData(x.toString(), y.toString(), rVal.toString())
     drawDot(plane, x, y, rVal)
 })

@@ -13,6 +13,17 @@ const rh = (canvas.height - step*2)/2;
 const line_length = 10;
 const line_width = 4;
 
+canvas.step = step;
+canvas.cx = cx;
+canvas.cy = cy;
+canvas.rw = rw;
+canvas.rh = rh;
+canvas.line_length = line_length;
+canvas.line_width = line_width;
+
+function GetR() {
+    return window.activeRCheckbox ? window.activeRCheckbox.value: null;
+}
 function drawAxis() {
     ctx.beginPath();
     ctx.moveTo(0, canvas.height / 2);
@@ -55,9 +66,15 @@ function drawCoords() {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'bottom';
 
+    let R_str = GetR();
+    R_str = R_str == null ? 'R' : parseFloat(R_str).toString();
+    let R_half_str = GetR();
+    R_half_str = R_half_str == null ? 'R/2' : (parseFloat(R_str) /2).toString();
+
+
     //horizontal
     ctx.textAlign = 'center';
-    ctx.fillText('R/2', cx + rw/2, cy);
+    ctx.fillText(R_half_str, cx + rw/2, cy);
     ctx.beginPath();
     ctx.moveTo(cx + rw/2, cy-line_length);
     ctx.lineTo(cx + rw/2,cy+line_length);
@@ -66,7 +83,7 @@ function drawCoords() {
     ctx.closePath();
     ctx.stroke();
 
-    ctx.fillText('R', cx + rw , cy );
+    ctx.fillText(R_str, cx + rw , cy );
     ctx.beginPath();
     ctx.moveTo(cx + rw, cy-line_length);
     ctx.lineTo(cx + rw,cy+line_length);
@@ -75,7 +92,7 @@ function drawCoords() {
     ctx.closePath();
     ctx.stroke();
 
-    ctx.fillText('-R/2', cx - rw/2, cy);
+    ctx.fillText('-' + R_half_str, cx - rw/2, cy);
     ctx.beginPath();
     ctx.moveTo(cx - rw/2, cy-line_length);
     ctx.lineTo(cx - rw/2,cy+line_length);
@@ -84,7 +101,7 @@ function drawCoords() {
     ctx.closePath();
     ctx.stroke();
 
-    ctx.fillText('-R', cx - rw , cy );
+    ctx.fillText('-' +R_str, cx - rw , cy );
     ctx.beginPath();
     ctx.moveTo(cx - rw, cy-line_length);
     ctx.lineTo(cx - rw,cy+line_length);
@@ -96,7 +113,7 @@ function drawCoords() {
     //vertical
     const text_x_shift = 10;
     ctx.textAlign = 'left';
-    ctx.fillText('R/2', cx +text_x_shift, cy - rh/2);
+    ctx.fillText(R_half_str, cx +text_x_shift, cy - rh/2);
     ctx.beginPath();
     ctx.moveTo(cx -line_length, cy- rh/2);
     ctx.lineTo(cx+ line_length,cy-rh/2);
@@ -105,7 +122,7 @@ function drawCoords() {
     ctx.closePath();
     ctx.stroke();
 
-    ctx.fillText('R', cx +text_x_shift, cy - rh);
+    ctx.fillText(R_str, cx +text_x_shift, cy - rh);
     ctx.beginPath();
     ctx.moveTo(cx -line_length, cy- rh);
     ctx.lineTo(cx+ line_length,cy-rh);
@@ -114,7 +131,7 @@ function drawCoords() {
     ctx.closePath();
     ctx.stroke();
 
-    ctx.fillText('-R/2', cx +text_x_shift, cy + rh/2);
+    ctx.fillText('-' + R_half_str, cx +text_x_shift, cy + rh/2);
     ctx.beginPath();
     ctx.moveTo(cx -line_length, cy + rh/2);
     ctx.lineTo(cx+ line_length,cy + rh/2);
@@ -123,7 +140,7 @@ function drawCoords() {
     ctx.closePath();
     ctx.stroke();
 
-    ctx.fillText('-R', cx +text_x_shift, cy + rh);
+    ctx.fillText('-' + R_str, cx +text_x_shift, cy + rh);
     ctx.beginPath();
     ctx.moveTo(cx -line_length, cy + rh);
     ctx.lineTo(cx+ line_length,cy + rh);
@@ -161,10 +178,15 @@ function drawTriangle(x,y,x2,y2) {
     ctx.fill();
 }
 
-drawCircle(cx,cy,rh/2);
+function redrawCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-drawRect(cx,cy,rw/2,-rh );
-drawTriangle(cx,cy, -rw/2,-rh);
-drawGrid();
-drawCoords();
-drawAxis();
+    drawCircle(cx, cy, rh/2);
+    drawRect(cx, cy, rw/2, -rh);
+    drawTriangle(cx, cy, -rw/2, -rh);
+    drawGrid();
+    drawCoords();
+    drawAxis();
+}
+redrawCanvas();
+window.redrawCanvas = redrawCanvas;
