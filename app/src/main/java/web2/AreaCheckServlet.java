@@ -1,6 +1,5 @@
 package web2;
 
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,7 +14,6 @@ import static web2.MathFunctions.*;
 public class AreaCheckServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletContext context = getServletContext();
 
         var x = request.getParameter("x");
         var y = request.getParameter("y");

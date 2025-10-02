@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import static web2.Validator.*;
 
@@ -15,29 +16,29 @@ public class ControllerServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        var x = request.getParameter("x");
-        var y = request.getParameter("y");
-        var r = request.getParameter("r");
+        var rawX = request.getParameter("x");
+        var rawY = request.getParameter("y");
+        var rawR = request.getParameter("r");
 
         String ERROR_MESSAGE = "Cause: %s";
-        if (x == null || y == null || r == null) {
+        if (rawX == null || rawY == null || rawR == null) {
             request.setAttribute("error", String.format(ERROR_MESSAGE, "Values are required"));
             request.getRequestDispatcher("/error.jsp").forward(request, response);
             return;
         }
 
         try {
-            float parsedX = Float.parseFloat(x);
-            float parsedY = Float.parseFloat(y);
-            float parsedR = Float.parseFloat(r);
+            var x = new BigDecimal(rawX);
+            var y = new BigDecimal(rawY);
+            var r = new BigDecimal(rawR);
 
-            System.out.println(parsedX + " " + parsedY + " " + parsedR);
+            System.out.println("ControllerServlet BigDecimals: " + x.toString() + " " + y.toString() + " " + r.toString());
 
-            var xCheck = checkX(parsedX);
-            var yCheck = checkY(parsedY);
-            var rCheck = checkR(parsedR);
+            var xCheck = checkX(x);
+            var yCheck = checkY(y);
+            var rCheck = checkR(r);
 
-            System.out.println(xCheck + " " + yCheck + " " + rCheck);
+            System.out.println("ControllerServlet Checks: " + xCheck + " " + yCheck + " " + rCheck);
 
             StringBuilder builder = new StringBuilder();
             if (!xCheck)
