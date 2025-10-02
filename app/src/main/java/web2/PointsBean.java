@@ -1,12 +1,22 @@
 package web2;
 
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PointsBean {
+@Named("pointsBean")
+@SessionScoped
+public class PointsBean implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final List<TableRow> history = new ArrayList<>();
 
-    public void addPoint(TableRow row) {
+    public void add(TableRow row) {
         history.add(row);
     }
 

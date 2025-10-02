@@ -2,6 +2,8 @@
 <%@ page errorPage="error.jsp" %>
 <%@ page import="web2.TableRow" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="pointsBean" class="web2.PointsBean" scope="session" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +21,7 @@
     <div class="container">
         <table class="header__inner">
             <tr>
-                <td id="student-name">Плотников Алексей Алексеевич</td>
+                <td id="student-name">Плотников Алексей Алексеевич 1</td>
                 <td class="group">P3214</td>
                 <td class="option">Вариант 42321</td>
             </tr>
@@ -181,17 +183,22 @@
                         </tr>
                         </thead>
                         <tbody class="table-archive__main">
-                        <% Object resultRow = request.getAttribute("newRow"); %>
-                        <% if (resultRow != null) {
-                            TableRow newRow = (TableRow) resultRow;
+
+                        <%
+                            List<TableRow> rows = pointsBean.getHistory();
+                            if (rows != null) {
+                                for (TableRow row : rows) {
                         %>
                         <tr>
-                            <td><%= newRow.getX() %></td>
-                            <td><%= newRow.getY() %></td>
-                            <td><%= newRow.getR() %></td>
-                            <td><%= newRow.getResult() ? "Hit" : "Miss" %></td>
+                            <td><%= row.getX() %></td>
+                            <td><%= row.getY() %></td>
+                            <td><%= row.getR() %></td>
+                            <td><%= row.getResult() ? "Hit" : "Miss" %></td>
                         </tr>
-                        <% } %>
+                        <%
+                                }
+                            }
+                        %>
                         </tbody>
                     </table>
                 </div>

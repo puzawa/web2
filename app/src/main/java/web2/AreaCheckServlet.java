@@ -1,5 +1,6 @@
 package web2;
 
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,16 +31,13 @@ public class AreaCheckServlet extends HttpServlet {
         var hitResult = hitCheck(parsedX, parsedY, parsedR);
 
         var newRow = new TableRow(parsedX, parsedY, parsedR, hitResult);
-
-        List<TableRow> rows = (List<TableRow>) context.getAttribute("rows");
-        List<TableRow> rowList = new LinkedList<>();
-
-        if (rows != null) {
-            rowList.addAll(rows);
+        PointsBean pointsBean = (PointsBean) request.getSession().getAttribute("pointsBean");
+        if (pointsBean == null) {
+            pointsBean = new PointsBean();
+            request.getSession().setAttribute("pointsBean", pointsBean);
         }
-        rowList.add(newRow);
+        pointsBean.add(newRow);
 
-        context.setAttribute("rows", rowList);
         request.setAttribute("newRow", newRow);
 
         request.getRequestDispatcher("/results.jsp").forward(request, response);

@@ -1,6 +1,11 @@
 package web2;
+import java.io.Serial;
+import java.io.Serializable;
 
-public class TableRow {
+public class TableRow implements Serializable{
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private float x;
     private float y;
     private float r;
