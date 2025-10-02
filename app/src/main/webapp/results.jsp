@@ -14,7 +14,7 @@
 
 <body>
 
-<header  class="header">
+<header class="header">
     <div class="container">
         <table class="header__inner">
             <tr>
@@ -27,50 +27,41 @@
 </header>
 
 <main>
-    <table class="res-table">
-        <thead id="table-head">
-        <tr>
-            <th>
-                X
-            </th>
-            <th>
-                Y
-            </th>
-            <th>
-                R
-            </th>
-            <th>
-                Результат
-            </th>
-        </tr>
-        </thead>
+    <div class="archive">
+        <h2 class="archive__heading">История</h2>
+        <div class="archive__table-wrapper">
+            <table class="archive__table table-archive">
+                <thead class="table-archive__head">
+                <tr>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>R</th>
+                    <th>Результат</th>
+                </tr>
+                </thead>
+                <tbody class="table-archive__main">
 
-        <% Object resultRow = request.getAttribute("newRow"); %>
-
-        <tbody>
-        <% if (resultRow != null) {
-            TableRow newRow = (TableRow) resultRow;
-        %>
-            <tr>
-                <td>
-                    <%= newRow.getX() %>
-                </td>
-
-                <td>
-                    <%= newRow.getY() %>
-                </td>
-
-                <td>
-                    <%= newRow.getR() %>
-                </td>
-
-                <td>
-                    <%= newRow.getResult() ? "Hit" : "Miss" %>
-                </td>
-            </tr>
-        <% } %>
-        </tbody>
-    </table>
+                <% Object resultRow = request.getAttribute("newRow"); %>
+                <% if (resultRow != null) {
+                    TableRow row = (TableRow) resultRow;
+                %>
+                <tr>
+                    <td><%= row.getX() %>
+                    </td>
+                    <td><%= row.getY() %>
+                    </td>
+                    <td><%= row.getR() %>
+                    </td>
+                    <td><%= row.getResult() ? "Hit" : "Miss" %>
+                    </td>
+                </tr>
+                <%
+                    }
+                %>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <br>
     <div class="home-link">
         <a href="index.jsp">На главную</a>

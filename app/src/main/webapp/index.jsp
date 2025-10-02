@@ -179,7 +179,7 @@
                             <th>X</th>
                             <th>Y</th>
                             <th>R</th>
-                            <th>Hit</th>
+                            <th>Результат</th>
                         </tr>
                         </thead>
                         <tbody class="table-archive__main">
