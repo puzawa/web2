@@ -181,15 +181,39 @@ function drawTriangle(x,y,x2,y2) {
     ctx.fill();
 }
 
+function drawDot(canvas, x, y, r, color = 'tomato'){
+    const ctx = canvas.getContext('2d')
+
+    ctx.beginPath();
+    ctx.translate(canvas.width/2, canvas.height/2);
+    let plotX = x*(canvas.rw/r);
+    let plotY = -y*(canvas.rh/r);
+
+    ctx.arc(plotX, plotY, 5, 0, 2*Math.PI);
+    ctx.fillStyle = color;
+    ctx.fill();
+
+    ctx.resetTransform();
+    ctx.closePath();
+}
+
+function drawLastDot() {
+    let r =GetR();
+    if(r != null && lastPoint != null)
+     drawDot(plane, lastPoint.x, lastPoint.y, r, 'yellow');
+}
+
 function redrawCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     drawCircle(cx, cy, rh/2);
     drawRect(cx, cy, rw/2, -rh);
     drawTriangle(cx, cy, -rw/2, -rh);
     drawGrid();
     drawCoords();
     drawAxis();
+
+    drawLastDot();
 }
+
 redrawCanvas();
 window.redrawCanvas = redrawCanvas;

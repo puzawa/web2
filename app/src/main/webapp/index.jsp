@@ -2,7 +2,7 @@
 <%@ page errorPage="error.jsp" %>
 <%@ page import="web2.TableRow" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:useBean id="pointsBean" class="web2.PointsBean" scope="session" />
+<jsp:useBean id="pointsBean" class="web2.PointsBean" scope="session"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -190,13 +190,18 @@
                                 for (TableRow row : rows) {
                         %>
                         <tr>
-                            <td><%= row.getX() %></td>
-                            <td><%= row.getY() %></td>
-                            <td><%= row.getR() %></td>
-                            <td><%= row.getResult() ? "Hit" : "Miss" %></td>
+                            <td><%= row.getX() %>
+                            </td>
+                            <td><%= row.getY() %>
+                            </td>
+                            <td><%= row.getR() %>
+                            </td>
+                            <td><%= row.getResult() ? "Hit" : "Miss" %>
+                            </td>
                         </tr>
                         <%
                                 }
+
                             }
                         %>
                         </tbody>
@@ -209,15 +214,18 @@
     </div>
 </main>
 
+<script>
+    <%
+    List<TableRow> temp_rows = pointsBean.getHistory();
+    TableRow lastRow = (temp_rows != null && !temp_rows.isEmpty()) ? temp_rows.get(temp_rows.size() - 1) : null;
+%>
+    const lastPoint = <%= (lastRow != null)
+        ? "{ x: " + lastRow.getX() + ", y: " + lastRow.getY() + ", r: " + lastRow.getR() + ", result: " + lastRow.getResult() + " }"
+        : "null" %>;
+</script>
+
 <script src="static/js/canvas.js"></script>
 <script src="static/js/sendRequest.js"></script>
-
-<script>
-    window.onload = function () {
-       // const plane = document.getElementById('coordinate-plane')
-        //drawDot(plane, Number(localStorage.getItem("x")), Number(localStorage.getItem("y")), Number(localStorage.getItem("r")))
-    }
-</script>
 
 </body>
 </html>

@@ -10,30 +10,6 @@ window.activeRCheckbox = null;
 
 const YInput = document.querySelector('.form-input');
 
-function saveDot(x, y, r) {
-    localStorage.setItem("x", x.toString())
-    localStorage.setItem("y", y.toString())
-    localStorage.setItem("r", r.toString())
-}
-
-function drawDot(canvas, x, y, r){
-    const ctx = canvas.getContext('2d')
-
-    ctx.beginPath();
-    ctx.translate(canvas.width/2, canvas.height/2);
-    let plotX = x*(canvas.rw/r);
-    let plotY = -y*(canvas.rh/r);
-
-    ctx.arc(plotX, plotY, 5, 0, 2*Math.PI);
-    ctx.fillStyle = 'purple';
-    ctx.fill();
-
-    ctx.resetTransform();
-    ctx.closePath()
-
-    saveDot(x, y, r);
-}
-
 function handlePoint() {
     window.redrawCanvas();
 
