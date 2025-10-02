@@ -68,7 +68,7 @@ async function sendData(x, y, r) {
     formData.set('y', y)
     formData.set('r', r)
 
-    await fetch('http://127.0.0.1:8080/web2/controller',
+    await fetch('/web2/controller',
         {
             method: 'POST',
             body: formData

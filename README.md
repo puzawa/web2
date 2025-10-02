@@ -1,8 +1,10 @@
-ssh s413039@helios.cs.ifmo.ru -p 2222  
+https://github.com/wildfly/wildfly/releases/download/37.0.1.Final/wildfly-37.0.1.Final.zip
 
-ssh -p 2222 s413039@helios.cs.ifmo.ru -L 8080:localhost:41393  
+admin:
 
-httpd -f ~/httpd-root/conf/httpd.conf -k start  
+ssh -p 2222 s413039@helios.cs.ifmo.ru -L 9991:localhost:41399
 
-java -DFCGI_PORT=41393 -jar /home/studs/s413039/httpd-root/fcgi-bin/FcgiServer.jar  
+sh wildfly-37.0.1.Final/bin/standalone.sh
+
+ssh -p 2222 s413039@helios.cs.ifmo.ru -L 41390:localhost:41390
 
