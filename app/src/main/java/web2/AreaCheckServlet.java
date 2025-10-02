@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import static web2.MathFunctions.*;
 
@@ -15,17 +16,17 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        var x = request.getParameter("x");
-        var y = request.getParameter("y");
-        var r = request.getParameter("r");
+        var rawX = request.getParameter("x");
+        var rawY = request.getParameter("y");
+        var rawR = request.getParameter("r");
 
-        float parsedX = Float.parseFloat(x);
-        float parsedY = Float.parseFloat(y);
-        float parsedR = Float.parseFloat(r);
+        var x = new BigDecimal(rawX);
+        var y = new BigDecimal(rawY);
+        var r = new BigDecimal(rawR);
 
-        var hitResult = hitCheck(parsedX, parsedY, parsedR);
+        var hitResult = hitCheck(x, y, r);
 
-        var newRow = new TableRow(parsedX, parsedY, parsedR, hitResult);
+        var newRow = new TableRow(x.floatValue(), y.floatValue(), r.floatValue(), hitResult);
         PointsBean pointsBean = (PointsBean) request.getSession().getAttribute("pointsBean");
         if (pointsBean == null) {
             pointsBean = new PointsBean();
