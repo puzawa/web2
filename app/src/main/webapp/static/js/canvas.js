@@ -200,11 +200,13 @@ function drawDot(canvas, x, y, r, color = 'tomato'){
 function drawLastDot() {
     let r =GetR();
     if(r != null && lastPoint != null)
-     drawDot(plane, lastPoint.x, lastPoint.y, r, 'yellow');
+     drawDot(plane, lastPoint.x, lastPoint.y, r, 'green');
 }
 
 function redrawCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#fdf4ff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawCircle(cx, cy, rh/2);
     drawRect(cx, cy, rw/2, -rh);
     drawTriangle(cx, cy, -rw/2, -rh);
