@@ -13,6 +13,9 @@ const rh = (canvas.height - step*2)/2;
 const line_length = 10;
 const line_width = 4;
 
+const canvas_color = 'rgba(181,162,241,0.67)'
+const grid_color = 'rgba(155,123,255,0.64)'
+
 canvas.step = step;
 canvas.cx = cx;
 canvas.cy = cy;
@@ -46,7 +49,7 @@ function drawGrid() {
     for (let x = 0; x < canvas.width + step; x += step) {
         ctx.moveTo(x, 0);
         ctx.lineTo(x, canvas.height);
-        ctx.strokeStyle = '#427aa1';
+        ctx.strokeStyle = grid_color;
         ctx.lineWidth = 1;
         ctx.stroke();
     }
@@ -54,7 +57,7 @@ function drawGrid() {
     for (let y = 0; y < canvas.height + step; y += step) {
         ctx.moveTo(0, y);
         ctx.lineTo(canvas.width, y);
-        ctx.strokeStyle = '#427aa1';
+        ctx.strokeStyle = grid_color;
         ctx.lineWidth = 1;
         ctx.stroke();
     }
@@ -153,7 +156,7 @@ function drawCoords() {
 function drawCircle(x, y, r) {
     ctx.beginPath();
     ctx.moveTo(x, y);
-    ctx.fillStyle = '#8ba9f0';
+    ctx.fillStyle = canvas_color;
     ctx.arc(x, y, r, Math.PI, Math.PI*0.5, true);
     ctx.closePath();
     ctx.fill();
@@ -162,7 +165,7 @@ function drawCircle(x, y, r) {
 function drawRect(x1,y1,w,h) {
     ctx.beginPath();
     ctx.moveTo(x1, y1);
-    ctx.fillStyle = '#8ba9f0';
+    ctx.fillStyle = canvas_color;
     ctx.rect(x1, y1, w, h);
     ctx.closePath();
     ctx.fill();
@@ -171,7 +174,7 @@ function drawRect(x1,y1,w,h) {
 function drawTriangle(x,y,x2,y2) {
     ctx.beginPath();
     ctx.moveTo(x, y);
-    ctx.fillStyle = '#8ba9f0';
+    ctx.fillStyle = canvas_color;
     ctx.lineTo(x+x2, y);
     ctx.lineTo(x, y+y2);
     ctx.closePath();

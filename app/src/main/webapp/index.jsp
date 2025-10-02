@@ -21,7 +21,7 @@
     <div class="container">
         <table class="header__inner">
             <tr>
-                <td id="student-name">Плотников Алексей Алексеевич 1</td>
+                <td id="student-name">Плотников Алексей Алексеевич</td>
                 <td class="group">P3214</td>
                 <td class="option">Вариант 42321</td>
             </tr>
