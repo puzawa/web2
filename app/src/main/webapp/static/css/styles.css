@@ -112,23 +112,31 @@ body {
     font-weight: 300;
 }
 
-.form-input, .form-submit {
+.form-input {
     border: 2px solid rgba(155, 123, 255, 0.4);
     border-radius: 4px;
 }
 
 .form-submit {
-    padding: 15px 0;
-    background-color: transparent;
-    cursor: pointer;
-}
+     padding: 10px 20px;
+     background-color: #9B7BFF;
+     color: #fff;
+     border: none;
+     border-radius: 8px;
+     font-weight: bold;
+     cursor: pointer;
+     transition: background-color 0.3s, transform 0.2s;
+ }
 
-.form-submit:active {
-    border-color: #9B7BFF;
+.form-submit:not(:disabled):hover {
+    background-color: #607BFF;
+    transform: scale(1.05);
 }
 
 .form-submit:disabled {
-    border-color: rgba(155, 0, 255, 0.4);
+    background-color: #f8dbf8;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
 
@@ -188,11 +196,12 @@ body {
 
 }
 
- #student-name {
-     font-weight: bold;
-     color: #ffddff;
-     font-size: 36px;
- }
+#student-name {
+    font-weight: bold;
+    color: #ffddff;
+    font-size: 36px;
+}
+
 .header__inner {
     font-family: cursive;
     color: #fafafa;
@@ -209,4 +218,24 @@ td[class="option"] {
     color: #ff6600;
     font-style: italic;
     text-align: center;
+}
+
+.home-link {
+    margin: 20px 0;
+}
+
+.home-link a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #9B7BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.home-link a:hover {
+    background-color: #607BFF;
+    transform: scale(1.05);
 }

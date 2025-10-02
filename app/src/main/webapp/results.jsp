@@ -28,7 +28,7 @@
 
 <main>
     <div class="archive">
-        <h2 class="archive__heading">История</h2>
+        <h2 class="archive__heading">Последняя точка</h2>
         <div class="archive__table-wrapper">
             <table class="archive__table table-archive">
                 <thead class="table-archive__head">
