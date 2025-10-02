@@ -19,14 +19,15 @@ function handlePoint() {
 
     if (window.activeXCheckbox === null ||
         window.activeRCheckbox === null ||
-        ['-', ''].includes(YInput.value)||
+        ['-', ''].includes(YInput.value) ||
         (!isNaN(num) && (num > 3 || num < -5)) ||
         parts.length > 2 ||
         ((num === 3 || num === -5) && (parts.length > 1 && !/^0*$/.test(parts[1])))
-    ) {
+    )
+    {
         submitBtn.disabled = true;
-    } else {
-
+    }
+    else {
         submitBtn.disabled = false;
 
         if (!(isFinite(activeXCheckbox.value) && isFinite(YInput.value) && isFinite(activeRCheckbox.value))) return;
@@ -36,16 +37,20 @@ function handlePoint() {
 }
 
 XCheckboxes.forEach(checkbox => checkbox.addEventListener('change', () => {
-    if (checkbox === window.activeXCheckbox) window.activeXCheckbox = null; else {
-        if (window.activeXCheckbox !== null) window.activeXCheckbox.checked = false;
+    if (checkbox === window.activeXCheckbox) window.activeXCheckbox = null;
+    else {
+        if (window.activeXCheckbox !== null)
+            window.activeXCheckbox.checked = false;
         window.activeXCheckbox = checkbox;
     }
     handlePoint();
 }));
 
 RCheckboxes.forEach(checkbox => checkbox.addEventListener('change', () => {
-    if (checkbox === window.activeRCheckbox) window.activeRCheckbox = null; else {
-        if (window.activeRCheckbox !== null) window.activeRCheckbox.checked = false;
+    if (checkbox === window.activeRCheckbox) window.activeRCheckbox = null;
+    else {
+        if (window.activeRCheckbox !== null)
+            window.activeRCheckbox.checked = false;
         window.activeRCheckbox = checkbox;
     }
     handlePoint();
@@ -57,7 +62,7 @@ YInput.addEventListener('input', function () {
     handlePoint();
 });
 
-async function sendData(x, y, r){
+async function sendData(x, y, r) {
     let formData = new URLSearchParams()
     formData.set('x', x)
     formData.set('y', y)
@@ -68,7 +73,9 @@ async function sendData(x, y, r){
             method: 'POST',
             body: formData
         })
-        .then(function (response) {return response.text()}).then((html) => {
+        .then(function (response) {
+            return response.text()
+        }).then((html) => {
             document.body.innerHTML = html
         });
     console.log("data fetched")
@@ -86,7 +93,7 @@ async function exchange(event) {
     const sendTime = new Date().toLocaleTimeString();
 
     try {
-        sendData(X.toString(),Y.toString(),R.toString());
+        sendData(X.toString(), Y.toString(), R.toString());
         drawDot(plane, X, Y, R);
 
     } catch (err) {

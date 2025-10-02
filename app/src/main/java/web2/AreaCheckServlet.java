@@ -26,7 +26,7 @@ public class AreaCheckServlet extends HttpServlet {
 
         var hitResult = hitCheck(x, y, r);
 
-        var newRow = new TableRow(x.floatValue(), y.floatValue(), r.floatValue(), hitResult);
+        var newRow = new TableRow(x, y, r, hitResult);
         PointsBean pointsBean = (PointsBean) request.getSession().getAttribute("pointsBean");
         if (pointsBean == null) {
             pointsBean = new PointsBean();
