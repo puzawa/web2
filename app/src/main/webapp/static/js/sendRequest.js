@@ -104,7 +104,7 @@ async function exchange(event) {
 
     const X = activeXCheckbox.value;
     let Y = YInput.value;
-    const R = activeXCheckbox.value;
+    const R = activeRCheckbox.value;
 
     const startExec = Date.now();
     const sendTime = new Date().toLocaleTimeString();

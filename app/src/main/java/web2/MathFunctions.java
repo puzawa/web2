@@ -8,14 +8,15 @@ public class MathFunctions {
     }
 
     private static boolean checkCircle(float x, float y, float r){
-        return (x >= -r/2) && (x <= 0) && (y >= 0) && (y <= r/2*(Math.sqrt(1-4*Math.pow(x, 2)/Math.pow(r, 2))));
+        r = r/2;
+        return (x >= -r) && (x <= 0) && (y >= -r) && (y <= 0) && (x*x + y*y <= r*r);
     }
 
     private static boolean checkRectangle(float x, float y, float r){
-        return (x >= -r) && (x <= 0) && (y >= -r) && (y <= 0);
+        return (x >= 0) && (x <= r/2) && (y >= 0) && (y <= r);
     }
 
     private static boolean checkTriangle(float x, float y, float r){
-        return (x >= 0) && (x <= r) && (y >= 0) && (y <= r) && (y <= -x + r);
+        return (x >= -r/2) && (x <= 0) && (y >= 0) && (y <= 2*x + r);
     }
 }

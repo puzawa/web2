@@ -3,14 +3,15 @@ package web2;
 public class Validator {
 
     public static boolean checkX(float x){
-        return x < -3 || x > 5;
+        return x >= -3 || x <= 5;
     }
 
     public static boolean checkY(float y){
-        return y < -5 || y > 3;
+
+        return y >= -5 || y <= 3;
     }
 
     public static boolean checkR(float r){
-        return r < 1 || r > 5;
+        return r >= 1 || r <=3;
     }
 }

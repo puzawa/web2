@@ -214,8 +214,8 @@
 
 <script>
     window.onload = function () {
-        //const plane = document.getElementById('coordinate-plane')
-        // drawDot(plane, Number(localStorage.getItem("x")), Number(localStorage.getItem("y")), Number(localStorage.getItem("r")))
+       // const plane = document.getElementById('coordinate-plane')
+        //drawDot(plane, Number(localStorage.getItem("x")), Number(localStorage.getItem("y")), Number(localStorage.getItem("r")))
     }
 </script>
 
