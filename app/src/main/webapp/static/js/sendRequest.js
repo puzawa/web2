@@ -86,7 +86,7 @@ plane.addEventListener("mousedown", async (event) => {
     const clickY = event.clientY - canvasPos.top
 
     console.log(clickX, clickY)
-    const rVal = r.value;
+    const rVal = r;
     const x = ((clickX - canvas.cx) / (canvas.rw / rVal)).toFixed(4);
     const y = ((canvas.cy - clickY) / (canvas.rh / rVal)).toFixed(4);
 
