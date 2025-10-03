@@ -34,134 +34,82 @@
         <div class="main__inner">
             <div class="form">
                 <form class="form__body" method="get" onsubmit="exchange(event)">
-                    <div class="X-input">
-                        <p class="X-input__text form-text">X</p>
-                        <ul class="X-input__list form-list">
-                            <li class="X-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="X-input" value="-3"
-                                           class="X-input__checkbox form-checkbox">
-                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="X-input__checkbox-text form-checkbox-text">-3</span>
-                                </label>
-                            </li>
-                            <li class="X-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="X-input" value="-2"
-                                           class="X-input__checkbox form-checkbox">
-                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="X-input__checkbox-text form-checkbox-text">-2</span>
-                                </label>
-                            </li>
-                            <li class="X-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="X-input" value="-1"
-                                           class="X-input__checkbox form-checkbox">
-                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="X-input__checkbox-text form-checkbox-text">-1</span>
-                                </label>
-                            </li>
-                            <li class="X-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="X-input" value="0"
-                                           class="X-input__checkbox form-checkbox">
-                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="X-input__checkbox-text form-checkbox-text">0</span>
-                                </label>
-                            </li>
-                            <li class="X-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="X-input" value="1"
-                                           class="X-input__checkbox form-checkbox">
-                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="X-input__checkbox-text form-checkbox-text">1</span>
-                                </label>
-                            </li>
-                            <li class="X-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="X-input" value="2"
-                                           class="X-input__checkbox form-checkbox">
-                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="X-input__checkbox-text form-checkbox-text">2</span>
-                                </label>
-                            </li>
-                            <li class="X-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="X-input" value="3"
-                                           class="X-input__checkbox form-checkbox">
-                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="X-input__checkbox-text form-checkbox-text">3</span>
-                                </label>
-                            </li>
-                            <li class="X-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="X-input" value="4"
-                                           class="X-input__checkbox form-checkbox">
-                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="X-input__checkbox-text form-checkbox-text">4</span>
-                                </label>
-                            </li>
-                            <li class="X-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="X-input" value="5"
-                                           class="X-input__checkbox form-checkbox">
-                                    <span class="X-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="X-input__checkbox-text form-checkbox-text">5</span>
-                                </label>
-                            </li>
-                        </ul>
+                    <div class="button-column" id="buttonColumnX">
+                    <p class="form-text">X</p>
                     </div>
+                    <script defer>
+                        const containerX = document.getElementById('buttonColumnX');
+                        const buttonsX = [];
+                        window.selectedXValue = null;
+                        for (let i = -3; i <= 5; i++) {
+                            const btn = document.createElement('button');
+                            btn.type = 'button';
+                            btn.textContent = i;
+
+                            if (i ===  window.selectedXValue) {
+                                btn.classList.add('selected');
+                            }
+
+                            btn.addEventListener('click', () => {
+                                if (btn.classList.contains('selected')) {
+                                    btn.classList.remove('selected');
+                                    window.selectedXValue = null;
+                                } else {
+                                    buttonsX.forEach(b => b.classList.remove('selected'));
+                                    btn.classList.add('selected');
+                                    window.selectedXValue = i;
+
+                                    handlePoint();
+                                }
+                                console.log('Selected X:',  window.selectedXValue);
+                            });
+
+                            containerX.appendChild(btn);
+                            buttonsX.push(btn);
+                        }
+                    </script>
+
                     <div class="Y-input">
-                        <p class="Y-input__text form-text">Y</p>
+                        <p class="form-text">Y</p>
                         <label>
                             <input type="text" name="Y-input" placeholder="Введите Y" class="Y-input__input form-input">
                         </label>
                     </div>
-                    <div class="R-input">
-                        <p class="R-input__text form-text">R</p>
-                        <ul class="R-input__list form-list">
-                            <li class="R-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="R-input" value="1"
-                                           class="R-input__checkbox form-checkbox">
-                                    <span class="R-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="R-input__checkbox-text form-checkbox-text">1</span>
-                                </label>
-                            </li>
-                            <li class="R-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="R-input" value="1.5"
-                                           class="R-input__checkbox form-checkbox">
-                                    <span class="R-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="R-input__checkbox-text form-checkbox-text">1.5</span>
-                                </label>
-                            </li>
-                            <li class="R-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="R-input" value="2"
-                                           class="R-input__checkbox form-checkbox">
-                                    <span class="R-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="R-input__checkbox-text form-checkbox-text">2</span>
-                                </label>
-                            </li>
-                            <li class="R-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="R-input" value="2.5"
-                                           class="R-input__checkbox form-checkbox">
-                                    <span class="R-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="R-input__checkbox-text form-checkbox-text">2.5</span>
-                                </label>
-                            </li>
-                            <li class="R-input__item form-item">
-                                <label>
-                                    <input type="checkbox" name="R-input" value="3"
-                                           class="R-input__checkbox form-checkbox">
-                                    <span class="R-input__checkbox-style form-checkbox-style"></span>
-                                    <span class="R-input__checkbox-text form-checkbox-text">3</span>
-                                </label>
-                            </li>
-                        </ul>
+
+                    <div class="button-column" id="buttonColumnR">
+                    <p class="form-text">R</p>
                     </div>
+                    <script defer>
+                        const containerR = document.getElementById('buttonColumnR');
+                        const buttonsR = [];
+                        window.selectedRValue = null;
+                        for (let i = 1; i <= 3; i+= 0.5) {
+                            const btn = document.createElement('button');
+                            btn.type = 'button';
+                            btn.textContent = i;
+
+                            if (i ===  window.selectedRValue) {
+                                btn.classList.add('selected');
+                            }
+
+                            btn.addEventListener('click', () => {
+                                if (btn.classList.contains('selected')) {
+                                    btn.classList.remove('selected');
+                                    window.selectedRValue = null;
+                                } else {
+                                    buttonsR.forEach(b => b.classList.remove('selected'));
+                                    btn.classList.add('selected');
+                                    window.selectedRValue = i;
+
+                                    handlePoint();
+                                }
+                                console.log('Selected R:',  window.selectedRValue);
+                            });
+
+                            containerR.appendChild(btn);
+                            buttonsR.push(btn);
+                        }
+                    </script>
                     <input type="submit" class="form-submit" disabled>
                 </form>
             </div>

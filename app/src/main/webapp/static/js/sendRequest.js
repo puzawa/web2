@@ -1,12 +1,5 @@
 const plane = document.getElementById('coordinate-plane')
-const form = document.getElementById('coords-form')
 const submitBtn = document.querySelector('.form-submit');
-
-const XCheckboxes = document.querySelectorAll('.X-input__checkbox');
-const RCheckboxes = document.querySelectorAll('.R-input__checkbox');
-
-window.activeXCheckbox = null;
-window.activeRCheckbox = null;
 
 const YInput = document.querySelector('.form-input');
 
@@ -17,8 +10,8 @@ function handlePoint() {
     const parts = y_str.split(".");
     const num = parseFloat(y_str);
 
-    if (window.activeXCheckbox === null ||
-        window.activeRCheckbox === null ||
+    if (window.selectedXValue === null ||
+        window.selectedRValue === null ||
         ['-', ''].includes(YInput.value) ||
         (!isNaN(num) && (num > 3 || num < -5)) ||
         parts.length > 2 ||
@@ -30,31 +23,11 @@ function handlePoint() {
     else {
         submitBtn.disabled = false;
 
-        if (!(isFinite(activeXCheckbox.value) && isFinite(YInput.value) && isFinite(activeRCheckbox.value))) return;
+        if (!(isFinite(selectedXValue) && isFinite(YInput.value) && isFinite(selectedRValue))) return;
 
-        drawDot(plane, activeXCheckbox.value, YInput.value, activeRCheckbox.value);
+        drawDot(plane, selectedXValue, YInput.value, selectedRValue);
     }
 }
-
-XCheckboxes.forEach(checkbox => checkbox.addEventListener('change', () => {
-    if (checkbox === window.activeXCheckbox) window.activeXCheckbox = null;
-    else {
-        if (window.activeXCheckbox !== null)
-            window.activeXCheckbox.checked = false;
-        window.activeXCheckbox = checkbox;
-    }
-    handlePoint();
-}));
-
-RCheckboxes.forEach(checkbox => checkbox.addEventListener('change', () => {
-    if (checkbox === window.activeRCheckbox) window.activeRCheckbox = null;
-    else {
-        if (window.activeRCheckbox !== null)
-            window.activeRCheckbox.checked = false;
-        window.activeRCheckbox = checkbox;
-    }
-    handlePoint();
-}));
 
 YInput.addEventListener('paste', event => event.preventDefault());
 YInput.addEventListener('input', function () {
@@ -85,9 +58,9 @@ async function sendData(x, y, r) {
 async function exchange(event) {
     event.preventDefault();
 
-    const X = activeXCheckbox.value;
+    const X = selectedXValue;
     let Y = YInput.value;
-    const R = activeRCheckbox.value;
+    const R = selectedRValue;
 
     const startExec = Date.now();
     const sendTime = new Date().toLocaleTimeString();

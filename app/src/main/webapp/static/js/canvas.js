@@ -25,7 +25,7 @@ canvas.line_length = line_length;
 canvas.line_width = line_width;
 
 function GetR() {
-    return window.activeRCheckbox ? window.activeRCheckbox.value: null;
+    return window.selectedRValue;
 }
 function drawAxis() {
     ctx.beginPath();
