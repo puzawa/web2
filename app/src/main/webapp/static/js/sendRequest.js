@@ -36,15 +36,13 @@ YInput.addEventListener('input', function () {
 });
 
 async function sendData(x, y, r) {
-    let formData = new URLSearchParams()
-    formData.set('x', x)
-    formData.set('y', y)
-    formData.set('r', r)
-
     await fetch('/web2/controller',
         {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({x,y,r})
         })
         .then(function (response) {
             return response.text()
@@ -77,7 +75,7 @@ async function exchange(event) {
 plane.addEventListener("mousedown", async (event) => {
     event.preventDefault()
 
-    let r = document.querySelector(".R-input__checkbox:checked")
+    let r = selectedRValue;
     if (r == null) {
         alert("Введите R");
         return
